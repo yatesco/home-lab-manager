@@ -54,6 +54,10 @@ This will:
 - Install pre-commit if not already present
 - Set up pre-commit hooks from `.pre-commit-config.yaml` (if present)
 
+# Standards
+
+All code must follow the coding standards (enforced by [Biome](https://biomejs.dev/) and the [Rust Project](https://www.rust-lang.org/) via `cargo fmt`) before committing.
+
 ## Source Code
 
 This is developed as part of my private home-lab but is mirrored in the following places:

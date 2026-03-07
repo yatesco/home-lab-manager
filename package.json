@@ -1,0 +1,10 @@
+{
+  "name": "home-lab-manager",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "devDependencies": {
+    "prettier-plugin-toml": "2.0.6"
+  },
+  "scripts": {}
+}
