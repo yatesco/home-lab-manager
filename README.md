@@ -28,3 +28,10 @@ However, this absolutely will avoid:
 
 - Prevent the fun aspects of digging around in each service.
 - Becoming _all or nothing_. It will always be opt-in.
+
+## Source Code
+
+This is developed as part of my private home-lab but is mirrored in the following places:
+
+- [Codeberg](https://codeberg.org/yatesco/home-lab-manager)
+- [GitHub](https://code.322302.xyz/home-lab/home-lab-manager)
