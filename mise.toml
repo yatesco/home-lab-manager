@@ -1,0 +1,31 @@
+[tools]
+python = "3.14"  # latest stable release
+
+# node = "20"
+
+[tasks.bootstrap]
+description = "Bootstrap development environment and install pre-commit"
+run = """
+set -e
+echo "🚀 Bootstrapping development environment..."
+mise install
+
+# Install pre-commit if not already installed
+if ! command -v pre-commit &> /dev/null; then
+    echo "📦 Installing pre-commit..."
+    pip install pre-commit
+else
+    echo "✓ pre-commit is already installed"
+fi
+
+# Install pre-commit hooks
+if [ -f .pre-commit-config.yaml ]; then
+    echo "🪝 Installing pre-commit hooks..."
+    pre-commit install
+    pre-commit run --all-files || true
+else
+    echo "ℹ️  No .pre-commit-config.yaml found"
+fi
+
+echo "✅ Bootstrap complete!"
+"""
