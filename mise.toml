@@ -19,6 +19,7 @@ python = "3.14" # latest stable release
 biome = "2.4"
 yamllint = "1.38"
 prettier = "3.0"
+gitleaks = "latest"
 # for some reason this needs to be in `package.json` for Prettier to find it - adding it here makes no difference
 # "npm:prettier-plugin-toml" = "2.0"
 
