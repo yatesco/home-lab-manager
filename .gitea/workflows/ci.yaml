@@ -10,7 +10,6 @@ jobs:
     container:
       image: colinyates/dev-docker:sha-90990da4b5e4c06e056189830d21c95c06fe5723
     env:
-      # MISE_NODE_VERSION: 24.12.0
       MISE_VERBOSE: 1
     steps:
       - name: Checkout code
