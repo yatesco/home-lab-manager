@@ -8,9 +8,7 @@ jobs:
   gitleaks:
     runs-on: ubuntu-latest
     container:
-      image: colinyates/dev-docker:sha-1d74f463f2cfde6b3b1cab8fad8f17f93c935fb0
-    env:
-      MISE_NODE_VERSION: 24.14.0
+      image: colinyates/dev-docker:sha-90990da4b5e4c06e056189830d21c95c06fe5723
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
