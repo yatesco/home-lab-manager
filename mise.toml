@@ -1,0 +1,64 @@
+min_version = "2024.9.5"
+
+[env]
+_.path = ["{{config_root}}/node_modules/.bin"]
+
+# Use the project name derived from the current directory
+PROJECT_NAME = "{{ config_root | basename }}"
+
+# Set up the path for node module binaries
+BIN_PATH = "{{ config_root }}/node_modules/.bin"
+
+NODE_ENV = "{{ env.NODE_ENV | default(value='development') }}"
+
+[tools]
+node = "lts"
+# used really only for pre-commit
+# latest stable release
+python = "3.14"
+# needed (or something like uv instead) for installing python tools
+pipx = "1.8.0"
+# formatting tools
+biome = "2.4"
+yamllint = "1.38"
+prettier = "3.0"
+gitleaks = "latest"
+# for some reason this needs to be in `package.json` for Prettier to find it - adding it here makes no difference
+# "npm:prettier-plugin-toml" = "2.0"
+
+[tasks.bootstrap]
+description = "Bootstrap development environment and install pre-commit"
+quiet = true
+run = """
+set -e
+mise install --quiet
+
+# Install npm dependencies
+if [ -f package.json ]; then
+    npm install
+fi
+
+# Install pre-commit if not already installed
+if ! command -v pre-commit &> /dev/null; then
+    pip install pre-commit
+fi
+
+# Install pre-commit hooks
+if [ -f .pre-commit-config.yaml ]; then
+    pre-commit install
+else
+    echo "ℹ️  No .pre-commit-config.yaml found"
+fi
+"""
+
+[tasks.lint]
+description = "Run Biome linting and formatting checks"
+run = ["biome check .", "prettier --check ."]
+depends = ["bootstrap"]
+wait_for = ["bootstrap"]
+
+[tasks.format]
+description = "Format Markdown, YAML, and TOML with Prettier"
+run = ["biome check --write .", "prettier --write ."]
+depends = ["bootstrap"]
+wait_for = ["bootstrap"]

@@ -1,0 +1,24 @@
+name: Security
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  gitleaks:
+    runs-on: ubuntu-latest
+    container:
+      image: colinyates/dev-docker:sha-90990da4b5e4c06e056189830d21c95c06fe5723
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install mise tools
+        run: |
+          mise install
+
+      - name: Run gitleaks
+        run: |
+          gitleaks detect --source="${GITHUB_WORKSPACE}" --no-git

@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    container:
+      image: colinyates/dev-docker:sha-90990da4b5e4c06e056189830d21c95c06fe5723
+    env:
+      MISE_VERBOSE: 1
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install mise tools
+        run: mise install --verbose
+
+      - name: Mise ls
+        run: |
+          mise ls
+
+      - name: Run mise lint
+        run: |
+          mise run lint

@@ -29,6 +29,35 @@ However, this absolutely will avoid:
 - Prevent the fun aspects of digging around in each service.
 - Becoming _all or nothing_. It will always be opt-in.
 
+## AI Coded?
+
+I've been a professional Software Engineer for over 30 years, so yes, my code is "safe" and I make every decision.
+
+However, I'm learning that AI is very useful for "doing what I want" but not so good at "find the best way to do it".
+
+So yes, I do use AI but for very small things which I then review. At no point does AI make any _meaningful_ decisions.
+
+## Development
+
+### Bootstrap
+
+This project uses [mise](https://mise.jn.sh/) to manage the development environment.
+
+To bootstrap your development environment and install pre-commit hooks:
+
+```bash
+mise run bootstrap
+```
+
+This will:
+
+- Install pre-commit if not already present
+- Set up pre-commit hooks from `.pre-commit-config.yaml` (if present)
+
+# Standards
+
+All code must follow the coding standards (enforced by [Biome](https://biomejs.dev/) and the [Rust Project](https://www.rust-lang.org/) via `cargo fmt`) before committing.
+
 ## Source Code
 
 This is developed as part of my private home-lab but is mirrored in the following places:
