@@ -17,6 +17,10 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Install mise tools
+        run: |
+          mise install
+
       - name: Run gitleaks
         run: |
           gitleaks detect --source="${GITHUB_WORKSPACE}" --no-git
