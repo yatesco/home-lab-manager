@@ -16,22 +16,18 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install mise tools
-        run: |
-          eval "$(mise activate bash)"
-          mise install --verbose
+        run: mise install --verbose
         env:
           MISE_VERBOSE: 1
 
       - name: Mise ls
         run: |
-          eval "$(mise activate bash)"
           mise ls
         env:
           MISE_VERBOSE: 1
 
       - name: Run mise lint
         run: |
-          eval "$(mise activate bash)"
           mise run lint
         env:
           MISE_VERBOSE: 1
