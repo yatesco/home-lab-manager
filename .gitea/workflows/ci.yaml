@@ -11,23 +11,18 @@ jobs:
       image: colinyates/dev-docker:sha-1d74f463f2cfde6b3b1cab8fad8f17f93c935fb0
     env:
       MISE_NODE_VERSION: 24.12.0
+      MISE_VERBOSE: 1
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Install mise tools
         run: mise install --verbose
-        env:
-          MISE_VERBOSE: 1
 
       - name: Mise ls
         run: |
           mise ls
-        env:
-          MISE_VERBOSE: 1
 
       - name: Run mise lint
         run: |
           mise run lint
-        env:
-          MISE_VERBOSE: 1
