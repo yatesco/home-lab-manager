@@ -14,7 +14,8 @@ NODE_ENV = "{{ env.NODE_ENV | default(value='development') }}"
 [tools]
 node = "{{ env['NODE_VERSION'] | default(value='lts') }}"
 # used really only for pre-commit
-python = "3.14" # latest stable release
+python = "3.14"  # latest stable release
+pipx = "1.8.0"  # needed (or something like uv instead) for installing python tools
 # formatting tools
 biome = "2.4"
 yamllint = "1.38"
