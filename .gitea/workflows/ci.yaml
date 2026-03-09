@@ -9,9 +9,15 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: colinyates/dev-docker:latest
+      options: --pull always
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Install mise tools
+        run: |
+          eval "$(mise activate bash)"
+          mise install --verbose
 
       - name: Run mise lint
         run: |

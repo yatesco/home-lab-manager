@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: colinyates/dev-docker:latest
+      options: --pull always
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
