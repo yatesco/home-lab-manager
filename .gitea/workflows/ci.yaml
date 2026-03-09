@@ -9,9 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: colinyates/dev-docker:sha-1d74f463f2cfde6b3b1cab8fad8f17f93c935fb0
-    env:
-      MISE_VERBOSE: 1
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -20,8 +17,12 @@ jobs:
         run: |
           eval "$(mise activate bash)"
           mise install --verbose
+        env:
+          MISE_VERBOSE: 1
 
       - name: Run mise lint
         run: |
           eval "$(mise activate bash)"
           mise run lint
+        env:
+          MISE_VERBOSE: 1
