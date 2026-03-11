@@ -1,0 +1,63 @@
+min_version = "2024.9.5"
+
+[tools]
+rust = "stable"
+
+[tasks.bootstrap]
+description = "Install tool versions required for the Rust workspace"
+quiet = true
+run = ["mise install --quiet"]
+
+[tasks.pre-commit]
+description = "Run checks used by the Git pre-commit hook"
+run = ["{{ mise_bin }} lint", "{{ mise_bin }} test"]
+depends = ["bootstrap"]
+wait_for = ["bootstrap"]
+
+[tasks.check]
+description = "Run cargo check for all Rust workspace members"
+run = ["cargo check --workspace"]
+depends = ["bootstrap"]
+wait_for = ["bootstrap"]
+
+[tasks.build]
+description = "Build all Rust workspace members"
+run = ["cargo build --workspace"]
+depends = ["bootstrap"]
+wait_for = ["bootstrap"]
+
+[tasks."build:release"]
+description = "Build all Rust workspace members in release mode"
+run = ["cargo build --workspace --release"]
+depends = ["bootstrap"]
+wait_for = ["bootstrap"]
+
+[tasks."rust:fmt"]
+description = "Check formatting for all Rust workspace members"
+run = ["cargo fmt --all --check"]
+depends = ["bootstrap"]
+wait_for = ["bootstrap"]
+
+[tasks."rust:clippy"]
+description = "Run clippy for all Rust workspace members"
+run = ["cargo clippy --workspace --all-targets -- -D warnings"]
+depends = ["bootstrap"]
+wait_for = ["bootstrap"]
+
+[tasks.lint]
+description = "Run Rust formatting and lint checks"
+run = ["{{ mise_bin }} rust:fmt", "{{ mise_bin }} rust:clippy"]
+depends = ["bootstrap"]
+wait_for = ["bootstrap"]
+
+[tasks.format]
+description = "Format all Rust workspace members"
+run = ["cargo fmt --all"]
+depends = ["bootstrap"]
+wait_for = ["bootstrap"]
+
+[tasks.test]
+description = "Run cargo tests for all Rust workspace members"
+run = ["cargo test --workspace"]
+depends = ["bootstrap"]
+wait_for = ["bootstrap"]

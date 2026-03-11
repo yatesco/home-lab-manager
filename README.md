@@ -43,7 +43,7 @@ So yes, I do use AI but for very small things which I then review. At no point d
 
 This project uses [mise](https://mise.jn.sh/) to manage the development environment.
 
-To bootstrap your development environment and install pre-commit hooks:
+To bootstrap your development environment for the Rust workspace:
 
 ```bash
 mise run bootstrap
@@ -51,19 +51,12 @@ mise run bootstrap
 
 This will:
 
-- Install pre-commit if not already present
-- Set up pre-commit hooks from `.pre-commit-config.yaml` (if present)
+- Install pinned tool versions for the Rust workspace via `mise`
 
 To run the same checks as the Git `pre-commit` hook manually:
 
 ```bash
 mise run pre-commit
-```
-
-To run only the staged secret leak check:
-
-```bash
-mise run pre-commit-leaks
 ```
 
 ## Standards

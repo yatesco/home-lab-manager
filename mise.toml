@@ -1,72 +1,49 @@
 min_version = "2024.9.5"
 
-[env]
-_.path = ["{{config_root}}/node_modules/.bin"]
-
-# Use the project name derived from the current directory
-PROJECT_NAME = "{{ config_root | basename }}"
-
-# Set up the path for node module binaries
-BIN_PATH = "{{ config_root }}/node_modules/.bin"
-
-NODE_ENV = "{{ env.NODE_ENV | default(value='development') }}"
-
 [tools]
-node = "lts"
-# used really only for pre-commit
-# latest stable release
-python = "3.14"
-# needed (or something like uv instead) for installing python tools
-pipx = "1.8.0"
-# formatting tools
-biome = "2.4"
-yamllint = "1.38"
-prettier = "3.0"
 gitleaks = "latest"
-# for some reason this needs to be in `package.json` for Prettier to find it - adding it here makes no difference
-# "npm:prettier-plugin-toml" = "2.0"
 
 [tasks.bootstrap]
-description = "Bootstrap development environment and install pre-commit"
+description = "Install tool versions required for all project tasks"
 quiet = true
-run = """
-set -e
-mise install --quiet
-
-# Install npm dependencies
-if [ -f package.json ]; then
-    npm install
-fi
-
-# Install pre-commit if not already installed
-if ! command -v pre-commit &> /dev/null; then
-    pip install pre-commit
-fi
-
-# Install pre-commit hooks
-if [ -f .pre-commit-config.yaml ]; then
-    pre-commit install
-else
-    echo "ℹ️  No .pre-commit-config.yaml found"
-fi
-"""
+run = ["{{ mise_bin }} install --quiet", "{{ mise_bin }} -C rust run bootstrap"]
 
 [tasks.pre-commit]
 description = "Run checks used by the Git pre-commit hook"
-run = ["{{ mise_bin }} pre-commit:leaks", "{{ mise_bin }} lint"]
+run = [
+  "{{ mise_bin }} pre-commit:leaks",
+  "{{ mise_bin }} check",
+  "{{ mise_bin }} -C rust run pre-commit"
+]
+depends = ["bootstrap"]
+wait_for = ["bootstrap"]
 
 [tasks."pre-commit:leaks"]
 description = "Check staged git changes for secret leaks"
 run = ["gitleaks git --pre-commit --staged --redact"]
-
-[tasks.lint]
-description = "Run Biome linting and formatting checks"
-run = ["biome check .", "prettier --check ."]
 depends = ["bootstrap"]
 wait_for = ["bootstrap"]
 
-[tasks.format]
-description = "Format Markdown, YAML, and TOML with Prettier"
-run = ["biome check --write .", "prettier --write ."]
+[tasks.lint]
+description = "Run lint checks"
+run = ["{{ mise_bin }} -C rust run lint"]
+depends = ["bootstrap"]
+wait_for = ["bootstrap"]
+
+[tasks.check]
+description = "Run check"
+run = ["{{ mise_bin }} -C rust run check"]
+depends = ["bootstrap"]
+wait_for = ["bootstrap"]
+
+[tasks.test]
+description = "Run tests"
+run = ["{{ mise_bin }} -C rust run test"]
+depends = ["bootstrap"]
+wait_for = ["bootstrap"]
+
+[tasks.build]
+description = "Run builds"
+run = ["{{ mise_bin }} -C rust run build"]
 depends = ["bootstrap"]
 wait_for = ["bootstrap"]

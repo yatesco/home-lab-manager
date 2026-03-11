@@ -5,6 +5,22 @@ on:
   workflow_dispatch:
 
 jobs:
+  check:
+    runs-on: ubuntu-latest
+    container:
+      image: colinyates/dev-docker:stable
+    env:
+      GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+      MISE_GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+      MISE_VERBOSE: 1
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      - name: Run mise check
+        run: |
+          mise run check
+
   lint:
     runs-on: ubuntu-latest
     container:
@@ -17,13 +33,38 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
 
-      - name: Install mise tools
-        run: mise install --verbose
-
-      - name: Mise ls
-        run: |
-          mise ls
-
       - name: Run mise lint
         run: |
           mise run lint
+
+  test:
+    runs-on: ubuntu-latest
+    container:
+      image: colinyates/dev-docker:stable
+    env:
+      GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+      MISE_GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+      MISE_VERBOSE: 1
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      - name: Run mise test
+        run: |
+          mise run test
+
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: colinyates/dev-docker:stable
+    env:
+      GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+      MISE_GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+      MISE_VERBOSE: 1
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      - name: Run mise build (release)
+        run: |
+          mise run build:release
