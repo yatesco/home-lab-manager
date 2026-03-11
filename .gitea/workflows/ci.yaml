@@ -8,7 +8,7 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     container:
-      image: colinyates/dev-docker:sha-90990da4b5e4c06e056189830d21c95c06fe5723@sha256:43ce528cda1c90af00aace95ce55a7785413f473a417aa0420242491da3c437f
+      image: colinyates/dev-docker:stable
     env:
       MISE_VERBOSE: 1
     steps:
