@@ -51,6 +51,10 @@ else
 fi
 """
 
+[tasks.pre-commit]
+description = "Run checks used by the Git pre-commit hook"
+run = ["gitleaks git --pre-commit --staged --redact", "{{ mise_bin }} lint"]
+
 [tasks.lint]
 description = "Run Biome linting and formatting checks"
 run = ["biome check .", "prettier --check ."]

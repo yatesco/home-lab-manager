@@ -1,5 +1,8 @@
 repos:
-  - repo: https://github.com/gitleaks/gitleaks
-    rev: v8.24.2
+  - repo: local
     hooks:
-      - id: gitleaks
+      - id: mise-pre-commit
+        name: mise pre-commit
+        entry: mise run pre-commit
+        language: system
+        pass_filenames: false

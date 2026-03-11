@@ -54,7 +54,13 @@ This will:
 - Install pre-commit if not already present
 - Set up pre-commit hooks from `.pre-commit-config.yaml` (if present)
 
-# Standards
+To run the same checks as the Git `pre-commit` hook manually:
+
+```bash
+mise run pre-commit
+```
+
+## Standards
 
 All code must follow the coding standards (enforced by [Biome](https://biomejs.dev/) and the [Rust Project](https://www.rust-lang.org/) via `cargo fmt`) before committing.
 
