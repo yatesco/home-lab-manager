@@ -60,6 +60,12 @@ To run the same checks as the Git `pre-commit` hook manually:
 mise run pre-commit
 ```
 
+To run only the staged secret leak check:
+
+```bash
+mise run pre-commit-leaks
+```
+
 ## Standards
 
 All code must follow the coding standards (enforced by [Biome](https://biomejs.dev/) and the [Rust Project](https://www.rust-lang.org/) via `cargo fmt`) before committing.

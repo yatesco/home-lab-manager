@@ -53,7 +53,11 @@ fi
 
 [tasks.pre-commit]
 description = "Run checks used by the Git pre-commit hook"
-run = ["gitleaks git --pre-commit --staged --redact", "{{ mise_bin }} lint"]
+run = ["{{ mise_bin }} pre-commit:leaks", "{{ mise_bin }} lint"]
+
+[tasks."pre-commit:leaks"]
+description = "Check staged git changes for secret leaks"
+run = ["gitleaks git --pre-commit --staged --redact"]
 
 [tasks.lint]
 description = "Run Biome linting and formatting checks"
