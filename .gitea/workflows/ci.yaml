@@ -8,7 +8,7 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     container:
-      image: colinyates/dev-docker:gazelle-b55a6ea72f8718d651d0f9e98e5cc5d52942021f
+      image: colinyates/dev-docker:gazelle-fd36dc03c8c5611d1d7621cfc15fe6e9bc472357
     env:
       MISE_VERBOSE: 1
     steps:
