@@ -24,6 +24,12 @@ run = ["gitleaks git --pre-commit --staged --redact"]
 depends = ["bootstrap"]
 wait_for = ["bootstrap"]
 
+[tasks."secrets:scan"]
+description = "Scan the workspace for leaked secrets"
+run = ["gitleaks detect --source=. --no-git --report-format json --report-path - --redact | jq -r '.[] | \"\\(.File):\\(.StartLine)\"'"]
+depends = ["bootstrap"]
+wait_for = ["bootstrap"]
+
 [tasks.lint]
 description = "Run lint checks"
 run = ["{{ mise_bin }} -C rust run lint"]

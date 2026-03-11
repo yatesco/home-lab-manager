@@ -1,0 +1,52 @@
+storage:
+  type: postgres
+  path: "postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}?sslmode=disable"
+
+alerting:
+  my-alert:
+    application-token: "<YOUR APPLICATION TOKEN>"
+    user-key: "<YOUR USER KEY>"
+    default-alert:
+      enabled: true
+      description: "health check failed"
+      send-on-resolved: true
+      failure-threshold: 3
+      success-threshold: 2
+
+endpoints:
+  - name: showmeacat # Name of your endpoint, can be anything
+    url: "https://www.showmeacat.com/"
+    group: web
+    interval: 10m
+    conditions:
+      - "[STATUS] == 200"
+      - "[RESPONSE_TIME] < 300"
+    alerts:
+      - type: my-alert
+
+  - name: gatus-github # Name of your endpoint, can be anything
+    url: "https://github.com/TwiN/gatus"
+    group: web
+    interval: 60m
+    conditions:
+      - "[STATUS] == 200"
+      - "[RESPONSE_TIME] < 1000"
+    alerts:
+      - type: my-alert
+
+external-endpoints:
+  - name: call-me-once
+    group: backups
+    token: "<YOUR TOKEN HERE>"
+    heartbeat:
+      interval: 24h
+    alerts:
+      - type: my-alert
+
+  - name: call-me-once-too
+    group: backups
+    token: "<YOUR TOKEN HERE>"
+    heartbeat:
+      interval: 36h
+    alerts:
+      - type: my-alert

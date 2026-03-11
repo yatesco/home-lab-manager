@@ -1,0 +1,28 @@
+title = "home-lab-manager gitleaks config"
+
+[extend]
+useDefault = true
+
+[[rules]]
+id = "yaml-token-value"
+description = "Detect token values in YAML files"
+regex = '''(?im)^\s*(?:token|application-token)\s*:\s*(?:"([^"\n<>][^"\n]{11,})"|'([^'\n<>][^'\n]{11,})'|([^"'\n<>][^\n<>]{11,}))\s*$'''
+secretGroup = 1
+path = '''(?i)\.ya?ml$'''
+keywords = ["token", "application-token"]
+
+[[rules]]
+id = "hc-ping-url"
+description = "Detect healthchecks heartbeat URLs"
+regex = '''https?://hc-ping\.com/([^"'\s<>]+)'''
+secretGroup = 1
+path = '''(?i)\.ya?ml$'''
+keywords = ["hc-ping.com"]
+
+[[rules]]
+id = "yaml-bearer-authorization"
+description = "Detect bearer authorization values in YAML files"
+regex = '''(?im)authorization\s*:\s*(?:"Bearer\s+([^"\n]+)"|'Bearer\s+([^'\n]+)'|Bearer\s+([^,\s}\n]+))'''
+secretGroup = 1
+path = '''(?i)\.ya?ml$'''
+keywords = ["authorization", "bearer"]
