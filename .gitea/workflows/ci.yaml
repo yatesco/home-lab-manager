@@ -24,7 +24,7 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     container:
-      image: colinyates/dev-docker:stable@sha256:8e3fb1c837ceaeafb6bd1b817396e3bfdcd0ecbd58b37a79b7d2a80fb0718869
+      image: colinyates/dev-docker:stable@sha256:1f872881165d42cc34e9404c50c481bc5cf9229c4159fcee4788fb8ee09e4ca7
     env:
       GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
       MISE_GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
