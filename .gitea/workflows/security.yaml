@@ -9,6 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: colinyates/dev-docker:stable
+    env:
+      GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+      MISE_GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
     steps:
       - name: Checkout code
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4

@@ -10,6 +10,8 @@ jobs:
     container:
       image: colinyates/dev-docker:stable
     env:
+      GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+      MISE_GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
       MISE_VERBOSE: 1
     steps:
       - name: Checkout code
