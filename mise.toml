@@ -53,3 +53,9 @@ description = "Run builds"
 run = ["{{ mise_bin }} -C rust run build"]
 depends = ["bootstrap"]
 wait_for = ["bootstrap"]
+
+[tasks."build:release"]
+description = "Run release builds"
+run = ["{{ mise_bin }} -C rust run build:release"]
+depends = ["bootstrap"]
+wait_for = ["bootstrap"]
