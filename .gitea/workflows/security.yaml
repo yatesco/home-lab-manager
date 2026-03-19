@@ -8,7 +8,7 @@ jobs:
   gitleaks:
     runs-on: ubuntu-latest
     container:
-      image: colinyates/dev-docker:stable@sha256:89b08c7596f45724fa064a233765f970c0498ce4ea982fc5fd8f504228349753
+      image: colinyates/dev-docker:stable@sha256:6a4355529245d9de528032a15a9cd806c9fa30b7a3cd99565252d5c36817ba46
     env:
       GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
       MISE_GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
