@@ -17,7 +17,7 @@ node = "lts"
 # latest stable release
 python = "3.14"
 # needed (or something like uv instead) for installing python tools
-pipx = "1.10.0"
+pipx = "1.10.1"
 # formatting tools
 biome = "2.4"
 yamllint = "1.38"
