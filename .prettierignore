@@ -3,3 +3,4 @@
 !**/*.yml
 !**/*.yaml
 !**/*.toml
+rust/target/
